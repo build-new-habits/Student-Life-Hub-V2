@@ -37,7 +37,7 @@ function renderMealCard(mealData) {
     if (mealData.isPremium) {
         const premiumBadge = createElement('span', {
             class: 'card-premium-badge'
-        }, 'Premium');
+        }, '✨ Premium');
         card.appendChild(premiumBadge);
     }
     
@@ -175,6 +175,7 @@ function renderMealCard(mealData) {
     cardBack.appendChild(backHeader);
     cardBack.appendChild(backBody);
     cardBack.appendChild(footer);
+    console.log('Footer created for:', mealData.id, footer);
     
     // Assemble everything
     flipInner.appendChild(cardFront);
@@ -226,7 +227,7 @@ function renderTaskCard(taskData) {
     if (taskData.isPremium) {
         const premiumBadge = createElement('span', {
             class: 'card-premium-badge'
-        }, 'Premium');
+        }, '✨ Premium');
         card.appendChild(premiumBadge);
     }
     
