@@ -1,1 +1,359 @@
+/*
+  FORM COMPONENTS
+  Purpose: Input fields, textareas, selects, checkboxes, radio buttons
+  Includes: Validation states, focus styles, accessibility
+*/
 
+/* ============================================
+   BASE INPUT STYLES
+   ============================================ */
+
+input,
+textarea,
+select {
+    /* Layout */
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    
+    /* Typography */
+    font-family: inherit;
+    font-size: var(--text-md);
+    line-height: 1.5;
+    color: var(--color-text-primary);
+    
+    /* Appearance */
+    background-color: var(--color-background);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    
+    /* Interaction */
+    transition: all var(--transition-fast);
+    min-height: 44px;                    /* Accessible touch target */
+}
+
+/* Focus state */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+/* Disabled state */
+input:disabled,
+textarea:disabled,
+select:disabled {
+    background-color: var(--color-surface);
+    color: var(--color-text-tertiary);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Placeholder text */
+input::placeholder,
+textarea::placeholder {
+    color: var(--color-text-tertiary);
+}
+
+/* ============================================
+   INPUT VARIANTS
+   ============================================ */
+
+/* Text input (default - already styled above) */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="search"] {
+    /* Already styled by base input styles */
+}
+
+/* Number input */
+input[type="number"] {
+    /* Remove spinner arrows */
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Textarea (multi-line) */
+textarea {
+    min-height: 120px;
+    resize: vertical;                    /* Allow vertical resizing only */
+    padding: var(--space-md);
+}
+
+/* Select dropdown */
+select {
+    padding-right: var(--space-xl);      /* Space for dropdown arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--space-md) center;
+    background-size: 12px;
+    appearance: none;
+}
+
+/* ============================================
+   VALIDATION STATES
+   ============================================ */
+
+/* Success state */
+.input-success,
+input.success {
+    border-color: var(--color-success);
+}
+
+.input-success:focus,
+input.success:focus {
+    box-shadow: 0 0 0 3px var(--color-success-light);
+}
+
+/* Error state */
+.input-error,
+input.error {
+    border-color: var(--color-error);
+}
+
+.input-error:focus,
+input.error:focus {
+    box-shadow: 0 0 0 3px var(--color-error-light);
+}
+
+/* Warning state */
+.input-warning,
+input.warning {
+    border-color: var(--color-warning);
+}
+
+.input-warning:focus,
+input.warning:focus {
+    box-shadow: 0 0 0 3px var(--color-warning-light);
+}
+
+/* ============================================
+   FORM GROUPS (Label + Input + Helper Text)
+   ============================================ */
+
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: var(--font-semibold);
+    color: var(--color-text-primary);
+    font-size: var(--text-sm);
+}
+
+/* Required indicator */
+.form-label.required::after {
+    content: " *";
+    color: var(--color-error);
+}
+
+.form-help {
+    display: block;
+    margin-top: var(--space-xs);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+}
+
+.form-error-message {
+    display: block;
+    margin-top: var(--space-xs);
+    font-size: var(--text-sm);
+    color: var(--color-error);
+    font-weight: var(--font-medium);
+}
+
+.form-success-message {
+    display: block;
+    margin-top: var(--space-xs);
+    font-size: var(--text-sm);
+    color: var(--color-success);
+    font-weight: var(--font-medium);
+}
+
+/* ============================================
+   CHECKBOXES & RADIO BUTTONS (Custom styled)
+   ============================================ */
+
+/* Hide default checkbox/radio */
+input[type="checkbox"],
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Custom checkbox/radio container */
+.checkbox-label,
+.radio-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    cursor: pointer;
+    user-select: none;
+    min-height: 44px;                    /* Accessible touch target */
+    padding: var(--space-xs) 0;
+}
+
+/* Custom checkbox box */
+.checkbox-label::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-background);
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+/* Custom radio circle */
+.radio-label::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-full);
+    background-color: var(--color-background);
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+/* Checked state - checkbox */
+input[type="checkbox"]:checked + .checkbox-label::before {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M13.5 2.5L6 10l-3.5-3.5L1 8l5 5 9-9z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Checked state - radio */
+input[type="radio"]:checked + .radio-label::before {
+    border-color: var(--color-primary);
+    border-width: 6px;
+}
+
+/* Focus state */
+input[type="checkbox"]:focus + .checkbox-label::before,
+input[type="radio"]:focus + .radio-label::before {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Disabled state */
+input[type="checkbox"]:disabled + .checkbox-label,
+input[type="radio"]:disabled + .radio-label {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   INPUT GROUPS (Icon + Input combinations)
+   ============================================ */
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon-left {
+    position: absolute;
+    left: var(--space-md);
+    color: var(--color-text-tertiary);
+    pointer-events: none;
+}
+
+.input-group.has-icon-left input {
+    padding-left: calc(var(--space-xl) + var(--space-md));
+}
+
+.input-icon-right {
+    position: absolute;
+    right: var(--space-md);
+    color: var(--color-text-tertiary);
+}
+
+.input-group.has-icon-right input {
+    padding-right: calc(var(--space-xl) + var(--space-md));
+}
+
+/* ============================================
+   SEARCH INPUT
+   ============================================ */
+
+.input-search {
+    padding-left: var(--space-xl);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23999' d='M11.5 10h-.79l-.28-.27A6.5 6.5 0 0 0 12 6.5 6.5 6.5 0 1 0 6.5 13c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L17.49 16l-4.99-5zm-5 0C4.01 10 2 7.99 2 5.5S4.01 1 6.5 1 11 3.01 11 5.5 8.99 10 6.5 10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: var(--space-sm) center;
+    background-size: 16px;
+}
+
+/* ============================================
+   FORM LAYOUT UTILITIES
+   ============================================ */
+
+.form-row {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+/* Stack form row on mobile */
+@media (max-width: 639px) {
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+/* ============================================
+   RANGE SLIDER
+   ============================================ */
+
+input[type="range"] {
+    width: 100%;
+    height: 6px;
+    background: var(--color-border);
+    border-radius: var(--radius-full);
+    outline: none;
+    padding: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    border: none;
+}

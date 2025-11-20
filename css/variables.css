@@ -1,1 +1,186 @@
+/*
+  DESIGN SYSTEM VARIABLES
+  Purpose: Define all colors, spacing, fonts, and design tokens in ONE place
+  Benefit: Change one value here and it updates everywhere in the app
+*/
 
+:root {
+    /* ============================================
+       BRAND & TAB COLOURS (Your Design Choices)
+       ============================================ */
+    
+    /* Primary Brand Colour - Main app colour */
+    --color-primary: #6366f1;           /* Indigo - main brand */
+    --color-primary-dark: #4f46e5;      /* Darker for hover states */
+    --color-primary-light: #a5b4fc;     /* Lighter for backgrounds */
+    
+    /* Tab Section Colours - Each section gets unique colour */
+    --color-study: #3B82F6;             /* Study Planner - Blue (focus, calm) */
+    --color-meals: #F97316;             /* Meals - Orange (appetite, energy) */
+    --color-cleaning: #10B981;          /* Cleaning - Green (fresh, clean) */
+    --color-budget: #8B5CF6;            /* Budget - Purple (wealth, value) */
+    --color-diy: #F59E0B;               /* DIY - Yellow (caution, tools) */
+    --color-support: #14B8A6;           /* Support - Teal (wellbeing, safety) */
+    --color-legal: #1E40AF;             /* Legal - Dark Blue (trust, authority) */
+    --color-uni: #EC4899;               /* Uni Essentials - Pink (youthful, friendly) */
+    
+    /* Darker versions for hover effects */
+    --color-study-dark: #2563EB;
+    --color-meals-dark: #EA580C;
+    --color-cleaning-dark: #059669;
+    --color-budget-dark: #7C3AED;
+    --color-diy-dark: #D97706;
+    --color-support-dark: #0F766E;
+    --color-legal-dark: #1E3A8A;
+    --color-uni-dark: #DB2777;
+    
+    /* Lighter versions for backgrounds */
+    --color-study-light: #DBEAFE;
+    --color-meals-light: #FFEDD5;
+    --color-cleaning-light: #D1FAE5;
+    --color-budget-light: #EDE9FE;
+    --color-diy-light: #FEF3C7;
+    --color-support-light: #CCFBF1;
+    --color-legal-light: #DBEAFE;
+    --color-uni-light: #FCE7F3;
+    
+    /* ============================================
+       NEUTRAL COLOURS (Backgrounds & Text)
+       ============================================ */
+    
+    --color-background: #ffffff;        /* Main page background */
+    --color-surface: #f9fafb;           /* Card and panel backgrounds */
+    --color-surface-dark: #f3f4f6;      /* Slightly darker surface */
+    --color-border: #e5e7eb;            /* Borders and dividers */
+    --color-border-dark: #d1d5db;       /* Darker borders */
+    
+    --color-text-primary: #111827;      /* Main body text */
+    --color-text-secondary: #6b7280;    /* Less important text */
+    --color-text-tertiary: #9ca3af;     /* Very subtle text */
+    --color-text-inverse: #ffffff;      /* White text on dark backgrounds */
+    
+    /* ============================================
+       STATUS & FEEDBACK COLOURS
+       ============================================ */
+    
+    --color-success: #10b981;           /* Green - success, completed */
+    --color-success-light: #d1fae5;     /* Light green background */
+    
+    --color-warning: #f59e0b;           /* Orange - warnings, caution */
+    --color-warning-light: #fef3c7;     /* Light orange background */
+    
+    --color-error: #ef4444;             /* Red - errors, danger */
+    --color-error-light: #fee2e2;       /* Light red background */
+    
+    --color-info: #3b82f6;              /* Blue - information */
+    --color-info-light: #dbeafe;        /* Light blue background */
+    
+    /* ============================================
+       GAMIFICATION COLOURS
+       ============================================ */
+    
+    --color-points: #fbbf24;            /* Gold for points */
+    --color-streak: #f97316;            /* Orange for fire/streaks */
+    --color-level: #8b5cf6;             /* Purple for levels */
+    --color-achievement: #10b981;       /* Green for unlocked achievements */
+    --color-locked: #9ca3af;            /* Gray for locked content */
+    
+    /* ============================================
+       SPACING SCALE (Mobile-First)
+       ============================================ */
+    
+    --space-xs: 0.25rem;     /* 4px - tiny gaps */
+    --space-sm: 0.5rem;      /* 8px - small padding */
+    --space-md: 1rem;        /* 16px - default spacing */
+    --space-lg: 1.5rem;      /* 24px - section spacing */
+    --space-xl: 2rem;        /* 32px - large gaps */
+    --space-2xl: 3rem;       /* 48px - major sections */
+    --space-3xl: 4rem;       /* 64px - page sections */
+    
+    /* ============================================
+       FONT SIZES (Mobile-First, scales up)
+       ============================================ */
+    
+    --text-xs: 0.75rem;      /* 12px - tiny labels */
+    --text-sm: 0.875rem;     /* 14px - small text */
+    --text-md: 1rem;         /* 16px - body text */
+    --text-lg: 1.125rem;     /* 18px - emphasized text */
+    --text-xl: 1.25rem;      /* 20px - subheadings */
+    --text-2xl: 1.5rem;      /* 24px - headings */
+    --text-3xl: 2rem;        /* 32px - page titles */
+    --text-4xl: 2.5rem;      /* 40px - hero text */
+    
+    /* ============================================
+       FONT WEIGHTS
+       ============================================ */
+    
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    
+    /* ============================================
+       BORDER RADIUS (Rounded corners)
+       ============================================ */
+    
+    --radius-sm: 0.25rem;    /* 4px - subtle rounding */
+    --radius-md: 0.5rem;     /* 8px - default buttons */
+    --radius-lg: 1rem;       /* 16px - cards */
+    --radius-xl: 1.5rem;     /* 24px - large cards */
+    --radius-full: 9999px;   /* Fully rounded (pills) */
+    
+    /* ============================================
+       SHADOWS (Depth and elevation)
+       ============================================ */
+    
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+    
+    /* ============================================
+       TRANSITIONS (Animation speeds)
+       ============================================ */
+    
+    --transition-fast: 150ms ease-in-out;
+    --transition-normal: 300ms ease-in-out;
+    --transition-slow: 500ms ease-in-out;
+    
+    /* ============================================
+       LAYOUT CONSTRAINTS
+       ============================================ */
+    
+    --max-width-content: 1200px;        /* Maximum content width */
+    --max-width-text: 65ch;             /* Optimal reading width */
+    --header-height: 64px;              /* Fixed header height */
+    --sidebar-width: 280px;             /* Desktop sidebar width */
+    
+    /* ============================================
+       Z-INDEX LAYERS (Stacking order)
+       ============================================ */
+    
+    --z-base: 0;                        /* Normal content */
+    --z-dropdown: 100;                  /* Dropdowns */
+    --z-sticky: 200;                    /* Sticky headers */
+    --z-modal-backdrop: 900;            /* Modal background overlay */
+    --z-modal: 1000;                    /* Modal content */
+    --z-notification: 1100;             /* Toast notifications */
+}
+
+/* ============================================
+   DARK MODE SUPPORT (Future-proofing)
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-background: #111827;
+        --color-surface: #1f2937;
+        --color-surface-dark: #374151;
+        --color-border: #374151;
+        --color-border-dark: #4b5563;
+        --color-text-primary: #f9fafb;
+        --color-text-secondary: #d1d5db;
+        --color-text-tertiary: #9ca3af;
+        --color-text-inverse: #111827;
+    }
+}

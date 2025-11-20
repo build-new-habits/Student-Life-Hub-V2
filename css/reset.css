@@ -1,1 +1,103 @@
+/*
+  CSS RESET
+  Purpose: Remove all browser default styling to start with a clean slate
+  This ensures our app looks the same in Chrome, Safari, Firefox, and Edge
+*/
 
+/* Apply to EVERYTHING - removes spacing and sets consistent box model */
+*,
+*::before,
+*::after {
+    margin: 0;                    /* Remove all default margins */
+    padding: 0;                   /* Remove all default padding */
+    box-sizing: border-box;       /* Make width/height include padding and border */
+}
+
+/* HTML and Body base settings */
+html {
+    font-size: 16px;              /* Base font size - everything else scales from this */
+    -webkit-font-smoothing: antialiased;        /* Smooth fonts on Mac/iOS */
+    -moz-osx-font-smoothing: grayscale;         /* Smooth fonts on Firefox */
+    scroll-behavior: smooth;      /* Smooth scrolling when clicking anchor links */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    /* System font stack - uses each device's native font for best performance */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+                 Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    line-height: 1.6;             /* Comfortable line spacing for reading */
+    min-height: 100vh;            /* Always fill full viewport height */
+}
+
+/* Remove default list styling */
+ul, ol {
+    list-style: none;             /* Remove bullets and numbers */
+}
+
+/* Remove default link styling */
+a {
+    text-decoration: none;        /* Remove underlines */
+    color: inherit;               /* Use parent element's color */
+}
+
+/* Make images responsive and prevent overflow */
+img, picture, video, canvas, svg {
+    display: block;               /* Remove extra space below images */
+    max-width: 100%;              /* Never exceed container width */
+    height: auto;                 /* Maintain aspect ratio */
+}
+
+/* Reset button styling */
+button {
+    border: none;                 /* Remove default border */
+    background: none;             /* Remove default background */
+    cursor: pointer;              /* Show pointer cursor on hover */
+    font-family: inherit;         /* Use same font as parent */
+    font-size: inherit;           /* Use same size as parent */
+}
+
+/* Reset form elements */
+input, textarea, select {
+    font-family: inherit;         /* Use same font as parent */
+    font-size: inherit;           /* Use same size as parent */
+    border: none;                 /* Remove default borders */
+    background: none;             /* Remove default backgrounds */
+    color: inherit;               /* Use parent's text color */
+}
+
+/* Remove spinner buttons from number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Reset tables */
+table {
+    border-collapse: collapse;    /* Remove spacing between table cells */
+    border-spacing: 0;            /* Remove cell spacing */
+}
+
+/* Remove default heading margins */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: inherit;
+}
+
+/* Remove default paragraph margins */
+p {
+    margin: 0;
+}
+
+/* Reset fieldset and legend */
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+legend {
+    padding: 0;
+}

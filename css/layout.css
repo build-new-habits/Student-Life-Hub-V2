@@ -1,1 +1,297 @@
+/*
+  LAYOUT SYSTEM (Mobile-First Responsive Design)
+  Purpose: Grid systems, containers, responsive breakpoints
+  Approach: Design for mobile first, then scale up to tablet and desktop
+*/
 
+/* ============================================
+   BREAKPOINTS (When layout changes)
+   ============================================ */
+
+/* 
+  Mobile: 0-639px (default - no media query needed)
+  Tablet: 640px-1023px
+  Desktop: 1024px+
+*/
+
+/* ============================================
+   CONTAINERS (Constrain content width)
+   ============================================ */
+
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+}
+
+/* Tablet: wider padding */
+@media (min-width: 640px) {
+    .container {
+        padding-left: var(--space-lg);
+        padding-right: var(--space-lg);
+    }
+}
+
+/* Desktop: maximum width */
+@media (min-width: 1024px) {
+    .container {
+        max-width: var(--max-width-content);
+    }
+}
+
+/* ============================================
+   GRID SYSTEM (Flexible layouts)
+   ============================================ */
+
+/* Basic grid - 1 column on mobile */
+.grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: 1fr;        /* Single column */
+}
+
+/* 2 columns on tablet */
+@media (min-width: 640px) {
+    .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 3 columns on desktop */
+@media (min-width: 1024px) {
+    .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .grid-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Auto-fit grid (cards automatically wrap) */
+.grid-auto {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* ============================================
+   FLEXBOX UTILITIES (Quick layouts)
+   ============================================ */
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-gap-sm {
+    gap: var(--space-sm);
+}
+
+.flex-gap-md {
+    gap: var(--space-md);
+}
+
+.flex-gap-lg {
+    gap: var(--space-lg);
+}
+
+/* ============================================
+   PAGE LAYOUT (Header, Main, Footer)
+   ============================================ */
+
+.page-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    height: var(--header-height);
+}
+
+.page-main {
+    flex: 1;                          /* Takes up remaining space */
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-3xl);
+}
+
+.page-footer {
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-xl) 0;
+}
+
+/* ============================================
+   SECTION SPACING
+   ============================================ */
+
+.section {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+}
+
+@media (min-width: 1024px) {
+    .section {
+        padding-top: var(--space-3xl);
+        padding-bottom: var(--space-3xl);
+    }
+}
+
+.section-tight {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
+}
+
+/* ============================================
+   DASHBOARD LAYOUT (Specific to dashboard page)
+   ============================================ */
+
+.dashboard-grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: 1fr;
+}
+
+/* Tablet: 2 column dashboard */
+@media (min-width: 640px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop: 3 column dashboard with sidebar */
+@media (min-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 280px 1fr;
+        gap: var(--space-xl);
+    }
+    
+    .dashboard-sidebar {
+        position: sticky;
+        top: calc(var(--header-height) + var(--space-lg));
+        height: fit-content;
+    }
+}
+
+/* ============================================
+   CARD LAYOUTS
+   ============================================ */
+
+.card-grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: 1fr;
+}
+
+/* Mobile: show 1 card */
+/* Tablet: show 2 cards side by side */
+@media (min-width: 640px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop: show 3 cards side by side */
+@media (min-width: 1024px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ============================================
+   SPACING UTILITIES (Quick margins/padding)
+   ============================================ */
+
+/* Margins */
+.m-0 { margin: 0; }
+.mt-xs { margin-top: var(--space-xs); }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+
+.mb-xs { margin-bottom: var(--space-xs); }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+
+/* Padding */
+.p-0 { padding: 0; }
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+.p-xl { padding: var(--space-xl); }
+
+/* ============================================
+   VISIBILITY UTILITIES (Show/Hide on devices)
+   ============================================ */
+
+/* Hide on mobile, show on tablet+ */
+.hide-mobile {
+    display: none;
+}
+
+@media (min-width: 640px) {
+    .hide-mobile {
+        display: block;
+    }
+}
+
+/* Show only on mobile */
+.show-mobile {
+    display: block;
+}
+
+@media (min-width: 640px) {
+    .show-mobile {
+        display: none;
+    }
+}
+
+/* Hide on desktop */
+@media (min-width: 1024px) {
+    .hide-desktop {
+        display: none;
+    }
+}
