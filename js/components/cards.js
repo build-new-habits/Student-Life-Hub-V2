@@ -161,6 +161,7 @@ function renderMealCard(mealData) {
     instructionsSection.appendChild(instructionsList);
     backBody.appendChild(instructionsSection);
     
+    console.log('Creating footer for meal:', mealData.name);
     // Footer with actions
     const footer = createElement('div', { class: 'card-footer' });
     footer.innerHTML = `
