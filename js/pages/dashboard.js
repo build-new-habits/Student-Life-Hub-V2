@@ -218,5 +218,3 @@ function checkDailyLogin() {
         displayUserStats();
     }
 }
-
-console.log('✅ Dashboard script loaded');
