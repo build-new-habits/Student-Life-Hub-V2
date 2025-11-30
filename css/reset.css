@@ -24,11 +24,10 @@ html {
 body {
     margin: 0;
     padding: 0;
-    /* System font stack - uses each device's native font for best performance */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
-                 Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    line-height: 1.6;             /* Comfortable line spacing for reading */
-    min-height: 100vh;            /* Always fill full viewport height */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    background-color: #0a0a0a;
+    color: #e5e5e5;
+    min-height: 100vh;
 }
 
 /* Remove default list styling */

@@ -23,8 +23,13 @@
    ============================================ */
 
 .page-header {
-    text-align: center;
+    background: linear-gradient(135deg, #F97316 0%, #FBBF24 100%);
+    color: #ffffff;
+    padding: var(--space-2xl);
+    border-radius: var(--radius-xl);
     margin-bottom: var(--space-2xl);
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(249, 115, 22, 0.3);
 }
 
 .page-title {
@@ -32,11 +37,14 @@
     font-weight: var(--font-bold);
     color: #ffffff;
     margin-bottom: var(--space-sm);
+    text-align: center;
 }
 
 .page-description {
     font-size: var(--text-lg);
-    color: #9ca3af;
+    color: #ffffff;
+    opacity: 0.95;
+    text-align: center;
 }
 
 /* ============================================
