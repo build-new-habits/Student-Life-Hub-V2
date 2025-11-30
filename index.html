@@ -3,175 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Student Life Hub V2 - Your gamified companion for student life management">
-    <title>Student Life Hub V2</title>
+    <title>Student Life Hub V2 - Build New Habits</title>
+    
     <style>
-        * {
+        /* Dark Modern Theme */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #db2777 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            color: #ffffff;
         }
-
-        .container {
-            background: white;
-            border-radius: 1.5rem;
+        
+        .welcome-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
             padding: 3rem;
-            max-width: 600px;
-            width: 100%;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.6s ease-in;
         }
-
-        .logo {
-            font-size: 3rem;
-            text-align: center;
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .icon {
+            font-size: 4rem;
             margin-bottom: 1rem;
+            animation: bounce 2s infinite;
         }
-
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
         h1 {
-            color: #1E293B;
-            text-align: center;
+            color: #1f2937;
             font-size: 2rem;
-            margin-bottom: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
-
+        
         .tagline {
-            color: #64748B;
-            text-align: center;
+            color: #6b7280;
             font-size: 1.125rem;
-            margin-bottom: 2rem;
-        }
-
-        .status {
-            background: #F0FDF4;
-            border: 2px solid #86EFAC;
-            border-radius: 0.75rem;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .status-text {
-            color: #166534;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .demo-section {
-            background: #F8FAFC;
-            border-radius: 1rem;
-            padding: 1.5rem;
             margin-bottom: 1.5rem;
         }
-
-        .demo-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+        
+        .success-message {
+            background-color: #d1fae5;
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border: 2px solid #10b981;
+            font-weight: 600;
         }
-
-        .demo-title {
-            color: #1E293B;
+        
+        .dashboard-preview {
+            margin: 2rem 0;
+        }
+        
+        .dashboard-preview h2 {
+            color: #374151;
             font-size: 1.25rem;
-            font-weight: 700;
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
-
-        .demo-description {
-            color: #64748B;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-            line-height: 1.5;
+        
+        .preview-text {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
-
-        .btn {
+        
+        .cta-button {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #7c3aed, #db2777);
             color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
             text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
             font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
         }
-
-        .btn:hover {
+        
+        .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
         }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn-secondary:hover {
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
-        }
-
-        .development-status {
-            background: #F8FAFC;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .status-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .status-icon {
-            font-size: 1.5rem;
-        }
-
-        .status-title {
-            color: #1E293B;
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
-
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            color: #475569;
-        }
-
-        .status-item.completed {
-            color: #166534;
-        }
-
-        .status-item.next {
-            color: #7C3AED;
-            font-weight: 600;
-        }
-
-        .check {
-            color: #22C55E;
-        }
-
+        
         @media (max-width: 640px) {
-            .container {
-                padding: 2rem;
+            .welcome-container {
+                padding: 2rem 1.5rem;
             }
-
+            
             h1 {
                 font-size: 1.5rem;
             }
-
+            
             .tagline {
                 font-size: 1rem;
             }
@@ -179,54 +130,25 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">🎓</div>
+    <div class="welcome-container">
+        <div class="icon">🎓</div>
+        
         <h1>Welcome to Student Life Hub V2</h1>
         <p class="tagline">Your gamified companion for student life management</p>
-
-        <div class="status">
-            <p class="status-text">Project initialized successfully! ✓</p>
+        
+        <div class="success-message">
+            Project initialized successfully! ✓
         </div>
-
-        <!-- Dashboard Demo -->
-        <div class="demo-section">
-            <div class="demo-icon">🏠</div>
-            <h2 class="demo-title">Dashboard Preview</h2>
-            <p class="demo-description">Experience the new dashboard with today's tasks, category carousel, and gamification stats</p>
-            <a href="pages/dashboard.html" class="btn">View Dashboard →</a>
-        </div>
-
-        <!-- Card System Demo -->
-        <div class="demo-section">
-            <div class="demo-icon">🃏</div>
-            <h2 class="demo-title">View Card System Demo</h2>
-            <p class="demo-description">See the flip cards in action with sample meals, study tasks, and cleaning tasks</p>
-            <a href="pages/card-demo.html" class="btn btn-secondary">View Card Demo →</a>
-        </div>
-
-        <div class="development-status">
-            <div class="status-header">
-                <span class="status-icon">📊</span>
-                <h3 class="status-title">Development Status</h3>
-            </div>
-            <div class="status-item completed">
-                <span class="check">✅</span>
-                <strong>Completed:</strong> Theme 1.1 (Foundation)
-            </div>
-            <div class="status-item completed">
-                <span class="check">✅</span>
-                <strong>Completed:</strong> Theme 1.2 (Card System)
-            </div>
-            <div class="status-item completed">
-                <span class="check">✅</span>
-                <strong>Completed:</strong> Theme 1.3 (Dashboard)
-            </div>
-            <div class="status-item next">
-                <strong>Next:</strong> Theme 1.4 (Category Pages)
-            </div>
-            <div class="status-item">
-                <strong>Launch Target:</strong> February 2025
-            </div>
+        
+        <div class="dashboard-preview">
+            <h2>🏠 Dashboard Preview</h2>
+            <p class="preview-text">
+                Experience the new dashboard with today's tasks, category carousel, and gamification stats
+            </p>
+            
+            <a href="pages/dashboard.html" class="cta-button">
+                View Dashboard →
+            </a>
         </div>
     </div>
 </body>
