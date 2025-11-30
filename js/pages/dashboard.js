@@ -1,356 +1,215 @@
-/*
-  DASHBOARD PAGE LOGIC
-  Purpose: Load and display dashboard data (stats, today's schedule, user info)
-  Dependencies: utils.js, storage.js, auth.js
-*/
-
-// ============================================
-// PAGE INITIALIZATION
-// ============================================
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('📊 Dashboard loading...');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Student Life Hub</title>
     
-    // Initialize dashboard
-    initializeDashboard();
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/accessibility.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/typography.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/gamification.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/components/navigation.css">
+    <link rel="stylesheet" href="../css/sections/dashboard.css">
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    // Set up mobile navigation
-    setupMobileNav();
-    
-    console.log('✅ Dashboard loaded');
-});
-
-// ============================================
-// DASHBOARD INITIALIZATION
-// ============================================
-
-/**
- * Initialize the dashboard with all data
- */
-function initializeDashboard() {
-    // Load user data
-    displayUserName();
-    displayCurrentDate();
-    displayMotivationalQuote();
-    
-    // Load stats
-    displayUserStats();
-    
-    // Load today's schedule
-    displayTodaysMeals();
-    displayTodaysStudy();
-    displayTodaysCleaning();
-    
-    // Check and update streak
-    checkDailyLogin();
-}
-
-// ============================================
-// WELCOME SECTION
-// ============================================
-
-/**
- * Display user's name in welcome message
- */
-function displayUserName() {
-    const user = getCurrentUser();
-    const nameElement = $('#user-name');
-    
-    if (nameElement) {
-        nameElement.textContent = user ? user.name : 'Student';
-    }
-}
-
-/**
- * Display current date in friendly format
- */
-function displayCurrentDate() {
-    const dateElement = $('#current-date');
-    
-    if (dateElement) {
-        const today = new Date();
-        const options = { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        };
-        
-        dateElement.textContent = today.toLocaleDateString('en-GB', options);
-    }
-}
-
-/**
- * Display random motivational quote
- */
-function displayMotivationalQuote() {
-    const quoteElement = $('#motivational-quote');
-    
-    if (quoteElement) {
-        const quotes = [
-            "Every accomplishment starts with the decision to try.",
-            "Success is the sum of small efforts repeated day in and day out.",
-            "Your only limit is you.",
-            "Dream big, start small, act now.",
-            "Progress, not perfection.",
-            "You've got this! 💪",
-            "Small steps lead to big changes.",
-            "Believe in yourself and all that you are.",
-            "Make today amazing!",
-            "You're capable of more than you know."
-        ];
-        
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        quoteElement.textContent = `"${randomQuote}"`;
-    }
-}
-
-// ============================================
-// STATS DISPLAY
-// ============================================
-
-/**
- * Display user statistics (points, level, streak, tasks)
- */
-function displayUserStats() {
-    // Get user data from storage
-    const userData = loadFromStorage('user_data') || {
-        points: 0,
-        level: 1,
-        streak: 0
-    };
-    
-    // Display points
-    const pointsElement = $('#user-points');
-    if (pointsElement) {
-        pointsElement.textContent = userData.points || 0;
-    }
-    
-    // Display level
-    const levelElement = $('#user-level');
-    if (levelElement) {
-        levelElement.textContent = userData.level || 1;
-    }
-    
-    // Display streak
-    const streakElement = $('#user-streak');
-    if (streakElement) {
-        streakElement.textContent = userData.streak || 0;
-    }
-    
-    // Display tasks completed today
-    displayTasksCompleted();
-}
-
-/**
- * Calculate and display tasks completed today
- */
-function displayTasksCompleted() {
-    const todaysTasks = loadFromStorage('todays_tasks') || [];
-    
-    const completed = todaysTasks.filter(task => task.completed).length;
-    const total = todaysTasks.length;
-    
-    const completedElement = $('#completed-tasks');
-    const totalElement = $('#total-tasks');
-    
-    if (completedElement) completedElement.textContent = completed;
-    if (totalElement) totalElement.textContent = total;
-}
-
-// ============================================
-// TODAY'S SCHEDULE
-// ============================================
-
-/**
- * Display today's meals
- */
-function displayTodaysMeals() {
-    const container = $('#today-meals');
-    if (!container) return;
-    
-    // Load meal planner data
-    const mealPlan = loadFromStorage('meal_planner') || {};
-    const today = formatDate(new Date(), 'yyyy-mm-dd');
-    const todaysMeals = mealPlan[today] || [];
-    
-    if (todaysMeals.length === 0) {
-        container.innerHTML = '<p class="empty-state">No meals planned yet. <a href="meals.html">Browse meals</a></p>';
-        return;
-    }
-    
-    // Clear container
-    container.innerHTML = '';
-    
-    // Render each meal
-    todaysMeals.forEach(meal => {
-        const mealItem = createElement('div', {
-            class: 'today-item',
-            style: 'border-left-color: var(--color-meals);'
-        });
-        
-        mealItem.innerHTML = `
-            <div class="today-item-content">
-                <div class="today-item-title">${meal.name}</div>
-                <div class="today-item-time">${meal.type} • ${meal.time || '30'} mins</div>
+    <!-- Mobile-First Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-top">
+                <h1 class="logo">Student Life Hub</h1>
+                <div class="header-stats">
+                    <span class="header-stat">🔥 <span id="header-streak">0</span></span>
+                    <span class="header-stat">⭐ <span id="header-points">0</span></span>
+                </div>
             </div>
-            <div class="today-item-action">
-                <button class="btn btn-sm btn-primary" style="background-color: var(--color-meals);">View</button>
-            </div>
-        `;
-        
-        container.appendChild(mealItem);
-    });
-}
-
-/**
- * Display today's study sessions
- */
-function displayTodaysStudy() {
-    const container = $('#today-study');
-    if (!container) return;
+        </div>
+    </header>
     
-    // Load study timetable
-    const timetable = loadFromStorage('study_timetable') || {};
-    const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
-    const todaysSessions = timetable[today] || [];
-    
-    if (todaysSessions.length === 0) {
-        container.innerHTML = '<p class="empty-state">No study sessions planned. <a href="study.html">Create schedule</a></p>';
-        return;
-    }
-    
-    // Clear container
-    container.innerHTML = '';
-    
-    // Render each session
-    todaysSessions.forEach(session => {
-        const sessionItem = createElement('div', {
-            class: 'today-item',
-            style: 'border-left-color: var(--color-study);'
-        });
-        
-        sessionItem.innerHTML = `
-            <div class="today-item-content">
-                <div class="today-item-title">${session.subject}</div>
-                <div class="today-item-time">${session.startTime} - ${session.endTime} • ${session.type}</div>
-            </div>
-            <div class="today-item-action">
-                <button class="btn btn-sm btn-primary" style="background-color: var(--color-study);">Start</button>
-            </div>
-        `;
-        
-        container.appendChild(sessionItem);
-    });
-}
-
-/**
- * Display today's cleaning tasks
- */
-function displayTodaysCleaning() {
-    const container = $('#today-cleaning');
-    if (!container) return;
-    
-    // Load cleaning schedule
-    const schedule = loadFromStorage('cleaning_schedule') || {};
-    const today = formatDate(new Date(), 'yyyy-mm-dd');
-    const todaysTasks = schedule[today] || [];
-    
-    if (todaysTasks.length === 0) {
-        container.innerHTML = '<p class="empty-state">No tasks scheduled. <a href="cleaning.html">View tasks</a></p>';
-        return;
-    }
-    
-    // Clear container
-    container.innerHTML = '';
-    
-    // Render each task
-    todaysTasks.forEach(task => {
-        const taskItem = createElement('div', {
-            class: 'today-item',
-            style: 'border-left-color: var(--color-cleaning);'
-        });
-        
-        taskItem.innerHTML = `
-            <div class="today-item-content">
-                <div class="today-item-title">${task.name}</div>
-                <div class="today-item-time">${task.room} • ${task.time || '15'} mins</div>
-            </div>
-            <div class="today-item-action">
-                <button class="btn btn-sm btn-primary" style="background-color: var(--color-cleaning);" onclick="completeTask('${task.id}')">
-                    Complete
-                </button>
-            </div>
-        `;
-        
-        container.appendChild(taskItem);
-    });
-}
-
-// ============================================
-// STREAK TRACKING
-// ============================================
-
-/**
- * Check if user logged in today and update streak
- */
-function checkDailyLogin() {
-    const userData = loadFromStorage('user_data') || {
-        lastLogin: null,
-        streak: 0
-    };
-    
-    const today = formatDate(new Date(), 'yyyy-mm-dd');
-    const lastLogin = userData.lastLogin;
-    
-    // If first login or not logged in today
-    if (!lastLogin || lastLogin !== today) {
-        // Check if yesterday
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        const yesterdayStr = formatDate(yesterday, 'yyyy-mm-dd');
-        
-        if (lastLogin === yesterdayStr) {
-            // Increment streak
-            userData.streak = (userData.streak || 0) + 1;
-        } else if (!lastLogin) {
-            // First login
-            userData.streak = 1;
-        } else {
-            // Streak broken
-            userData.streak = 1;
-        }
-        
-        // Update last login
-        userData.lastLogin = today;
-        
-        // Save
-        saveToStorage('user_data', userData);
-        
-        // Update display
-        displayUserStats();
-    }
-}
-
-// ============================================
-// MOBILE NAVIGATION
-// ============================================
-
-/**
- * Set up mobile navigation toggle
- */
-function setupMobileNav() {
-    const navToggle = $('.nav-toggle');
-    const navMenu = $('#main-menu');
-    
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+    <!-- Main Content -->
+    <main id="main-content" class="dashboard-main">
+        <div class="container">
             
-            this.setAttribute('aria-expanded', !isExpanded);
-            navMenu.classList.toggle('active');
-        });
-    }
-}
-
-console.log('✅ Dashboard script loaded');
+            <!-- Welcome Section -->
+            <section class="dashboard-welcome">
+                <div class="welcome-content">
+                    <h2 class="welcome-title">
+                        Welcome back, <span id="user-name">Student</span>! 👋
+                    </h2>
+                    <p class="welcome-date" id="current-date">
+                        <!-- Date will be inserted by JavaScript -->
+                    </p>
+                    <p class="welcome-quote" id="motivational-quote">
+                        <!-- Quote will be inserted by JavaScript -->
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Quick Stats -->
+            <section class="dashboard-stats" aria-label="Your statistics">
+                <div class="stats-grid">
+                    <!-- Points Card -->
+                    <div class="stat-card stat-points">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="user-points">0</div>
+                            <div class="stat-label">Points</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Level Card -->
+                    <div class="stat-card stat-level">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="user-level">1</div>
+                            <div class="stat-label">Level</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Streak Card -->
+                    <div class="stat-card stat-streak">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="user-streak">0</div>
+                            <div class="stat-label">Day Streak</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tasks Card -->
+                    <div class="stat-card stat-tasks">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <div class="stat-value">
+                                <span id="completed-tasks">0</span>/<span id="total-tasks">0</span>
+                            </div>
+                            <div class="stat-label">Tasks Today</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Today's Schedule -->
+            <section class="dashboard-today">
+                <h2 class="section-title">Today's Schedule</h2>
+                
+                <!-- Meals Today -->
+                <div class="today-section">
+                    <h3 class="today-section-title">
+                        <span class="section-icon" style="background-color: var(--color-meals);">🍳</span>
+                        Meals
+                    </h3>
+                    <div id="today-meals" class="today-items">
+                        <p class="empty-state">No meals planned yet. <a href="meals.html">Browse meals</a></p>
+                    </div>
+                </div>
+                
+                <!-- Study Sessions Today -->
+                <div class="today-section">
+                    <h3 class="today-section-title">
+                        <span class="section-icon" style="background-color: var(--color-study);">📚</span>
+                        Study Sessions
+                    </h3>
+                    <div id="today-study" class="today-items">
+                        <p class="empty-state">No study sessions planned. <a href="study.html">Create schedule</a></p>
+                    </div>
+                </div>
+                
+                <!-- Cleaning Tasks Today -->
+                <div class="today-section">
+                    <h3 class="today-section-title">
+                        <span class="section-icon" style="background-color: var(--color-cleaning);">🧹</span>
+                        Cleaning Tasks
+                    </h3>
+                    <div id="today-cleaning" class="today-items">
+                        <p class="empty-state">No tasks scheduled. <a href="cleaning.html">View tasks</a></p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Quick Actions -->
+            <section class="dashboard-actions">
+                <h2 class="section-title">Quick Actions</h2>
+                <div class="action-buttons">
+                    <a href="meals.html" class="btn btn-primary" style="background-color: var(--color-meals);">
+                        + Add Meal
+                    </a>
+                    <a href="study.html" class="btn btn-primary" style="background-color: var(--color-study);">
+                        + Study Block
+                    </a>
+                    <a href="cleaning.html" class="btn btn-primary" style="background-color: var(--color-cleaning);">
+                        + Cleaning Task
+                    </a>
+                    <a href="budget.html" class="btn btn-primary" style="background-color: var(--color-budget);">
+                        + Log Expense
+                    </a>
+                </div>
+            </section>
+            
+        </div>
+    </main>
+    
+    <!-- Bottom Tab Navigation (Mobile-First) -->
+    <nav class="bottom-tabs" aria-label="Main navigation" role="navigation">
+        <a href="dashboard.html" class="tab-item active" aria-current="page">
+            <span class="tab-icon">🏠</span>
+            <span class="tab-label">Home</span>
+        </a>
+        
+        <a href="meals.html" class="tab-item">
+            <span class="tab-icon">🍳</span>
+            <span class="tab-label">Meals</span>
+        </a>
+        
+        <a href="study.html" class="tab-item">
+            <span class="tab-icon">📚</span>
+            <span class="tab-label">Study</span>
+        </a>
+        
+        <a href="cleaning.html" class="tab-item">
+            <span class="tab-icon">🧹</span>
+            <span class="tab-label">Clean</span>
+        </a>
+        
+        <a href="budget.html" class="tab-item">
+            <span class="tab-icon">💰</span>
+            <span class="tab-label">Budget</span>
+        </a>
+        
+        <a href="diy.html" class="tab-item">
+            <span class="tab-icon">🔧</span>
+            <span class="tab-label">DIY</span>
+        </a>
+        
+        <a href="support.html" class="tab-item">
+            <span class="tab-icon">💚</span>
+            <span class="tab-label">Support</span>
+        </a>
+        
+        <a href="legal.html" class="tab-item">
+            <span class="tab-icon">⚖️</span>
+            <span class="tab-label">Legal</span>
+        </a>
+        
+        <a href="uni-essentials.html" class="tab-item">
+            <span class="tab-icon">🎒</span>
+            <span class="tab-label">Uni</span>
+        </a>
+    </nav>
+    
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/components/cards.js"></script>
+    <script src="../js/pages/dashboard.js"></script>
+</body>
+</html>
