@@ -6,7 +6,6 @@
     <title>Student Life Hub V2 - Build New Habits</title>
     
     <style>
-        /* Dark Modern Theme */
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             margin: 0;
@@ -19,137 +18,47 @@
             color: #ffffff;
         }
         
-        .welcome-container {
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 24px;
-            padding: 3rem;
-            max-width: 500px;
-            width: 90%;
+        .loader {
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 0.6s ease-in;
         }
         
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
         }
         
-        .icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         h1 {
-            color: #1f2937;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        
-        .tagline {
-            color: #6b7280;
-            font-size: 1.125rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .success-message {
-            background-color: #d1fae5;
-            color: #065f46;
-            padding: 1rem;
-            border-radius: 12px;
-            margin: 1.5rem 0;
-            border: 2px solid #10b981;
+            font-size: 1.5rem;
             font-weight: 600;
+            margin: 0;
         }
         
-        .dashboard-preview {
-            margin: 2rem 0;
-        }
-        
-        .dashboard-preview h2 {
-            color: #374151;
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        
-        .preview-text {
-            color: #6b7280;
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #7c3aed, #db2777);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.125rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
-        }
-        
-        @media (max-width: 640px) {
-            .welcome-container {
-                padding: 2rem 1.5rem;
-            }
-            
-            h1 {
-                font-size: 1.5rem;
-            }
-            
-            .tagline {
-                font-size: 1rem;
-            }
+        p {
+            margin-top: 0.5rem;
+            opacity: 0.9;
         }
     </style>
+    
+    <script>
+        // Redirect to dashboard immediately
+        window.location.href = 'pages/dashboard.html';
+    </script>
 </head>
 <body>
-    <div class="welcome-container">
-        <div class="icon">🎓</div>
-        
-        <h1>Welcome to Student Life Hub V2</h1>
-        <p class="tagline">Your gamified companion for student life management</p>
-        
-        <div class="success-message">
-            Project initialized successfully! ✓
-        </div>
-        
-        <div class="dashboard-preview">
-            <h2>🏠 Dashboard Preview</h2>
-            <p class="preview-text">
-                Experience the new dashboard with today's tasks, category carousel, and gamification stats
-            </p>
-            
-            <a href="pages/dashboard.html" class="cta-button">
-                View Dashboard →
-            </a>
-        </div>
+    <div class="loader">
+        <div class="spinner"></div>
+        <h1>Loading Student Life Hub...</h1>
+        <p>Taking you to your dashboard</p>
     </div>
 </body>
 </html>
