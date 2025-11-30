@@ -1,55 +1,31 @@
 /*
-  DASHBOARD PAGE STYLES
-  Purpose: Layout and styling for the main dashboard/homepage
-  Includes: Welcome section, stats cards, today's schedule, quick actions, mobile tabs
+  DARK DASHBOARD DESIGN
+  Nearly black background, centered content, modern clean look
 */
 
 /* ============================================
-   DASHBOARD MAIN LAYOUT
+   DARK THEME COLORS
    ============================================ */
 
-.dashboard-main {
-    padding: var(--space-xl) 0;
-    min-height: 80vh;
-    padding-bottom: 100px; /* Space for bottom nav on mobile */
+.dark-theme {
+    background-color: #0a0a0a;
+    color: #e5e5e5;
+    min-height: 100vh;
 }
 
 /* ============================================
-   MOBILE-FIRST HEADER
+   DASHBOARD LAYOUT
    ============================================ */
 
-.main-header {
-    background-color: var(--color-background);
-    border-bottom: 1px solid var(--color-border);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: var(--shadow-sm);
+.dashboard-main {
+    padding: var(--space-xl) var(--space-md);
+    padding-bottom: 100px; /* Space for bottom nav */
+    min-height: 100vh;
 }
 
-.header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--space-md) 0;
-}
-
-.logo {
-    font-size: var(--text-xl);
-    font-weight: var(--font-bold);
-    color: var(--color-text-primary);
-    margin: 0;
-}
-
-.header-stats {
-    display: flex;
-    gap: var(--space-md);
-}
-
-.header-stat {
-    font-size: var(--text-md);
-    font-weight: var(--font-semibold);
-    color: var(--color-text-primary);
+.dashboard-container {
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 /* ============================================
@@ -57,32 +33,36 @@
    ============================================ */
 
 .dashboard-welcome {
-    background: linear-gradient(135deg, var(--color-study), var(--color-meals));
-    color: var(--color-text-inverse);
-    padding: var(--space-2xl) var(--space-xl);
-    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, #3B82F6 0%, #F97316 100%);
+    color: #ffffff;
+    padding: var(--space-2xl);
+    border-radius: var(--radius-xl);
     margin-bottom: var(--space-2xl);
     text-align: center;
+    box-shadow: 0 10px 40px rgba(59, 130, 246, 0.3);
 }
 
 .welcome-title {
     font-size: var(--text-3xl);
     font-weight: var(--font-bold);
     margin-bottom: var(--space-sm);
+    line-height: 1.2;
 }
 
 .welcome-date {
     font-size: var(--text-lg);
-    opacity: 0.9;
+    opacity: 0.95;
     margin-bottom: var(--space-md);
+    font-weight: var(--font-medium);
 }
 
 .welcome-quote {
     font-size: var(--text-xl);
     font-style: italic;
-    opacity: 0.95;
+    opacity: 0.9;
     max-width: 600px;
     margin: 0 auto;
+    line-height: 1.4;
 }
 
 /* ============================================
@@ -95,19 +75,11 @@
 
 .stats-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-md);
 }
 
-/* 2 columns on mobile landscape / small tablet */
-@media (min-width: 480px) {
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* 4 columns on desktop */
-@media (min-width: 1024px) {
+@media (min-width: 640px) {
     .stats-grid {
         grid-template-columns: repeat(4, 1fr);
     }
@@ -118,64 +90,37 @@
    ============================================ */
 
 .stat-card {
-    background-color: var(--color-surface);
+    background-color: #1a1a1a;
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
+    text-align: center;
+    border: 1px solid #2a2a2a;
     transition: all var(--transition-fast);
 }
 
 .stat-card:hover {
-    box-shadow: var(--shadow-lg);
+    border-color: #3B82F6;
     transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
 }
 
 .stat-icon {
     font-size: var(--text-3xl);
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-surface-dark);
-    border-radius: var(--radius-lg);
-}
-
-.stat-content {
-    flex: 1;
+    margin-bottom: var(--space-sm);
 }
 
 .stat-value {
     font-size: var(--text-2xl);
     font-weight: var(--font-bold);
-    color: var(--color-text-primary);
-    line-height: 1.2;
+    color: #ffffff;
+    margin-bottom: var(--space-xs);
 }
 
 .stat-label {
     font-size: var(--text-sm);
-    color: var(--color-text-secondary);
-    margin-top: var(--space-xs);
-}
-
-/* Color accents for different stats */
-.stat-points .stat-icon {
-    background-color: rgba(251, 191, 36, 0.1);
-}
-
-.stat-level .stat-icon {
-    background-color: rgba(139, 92, 246, 0.1);
-}
-
-.stat-streak .stat-icon {
-    background-color: rgba(249, 115, 22, 0.1);
-}
-
-.stat-tasks .stat-icon {
-    background-color: rgba(16, 185, 129, 0.1);
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 /* ============================================
@@ -183,128 +128,51 @@
    ============================================ */
 
 .dashboard-today {
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--space-3xl);
 }
 
 .section-title {
     font-size: var(--text-2xl);
     font-weight: var(--font-bold);
     margin-bottom: var(--space-lg);
-    color: var(--color-text-primary);
+    color: #ffffff;
 }
 
 .today-section {
-    background-color: var(--color-surface);
+    background-color: #1a1a1a;
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
     margin-bottom: var(--space-lg);
-    box-shadow: var(--shadow-sm);
+    border: 1px solid #2a2a2a;
 }
 
 .today-section-title {
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     font-weight: var(--font-semibold);
     margin-bottom: var(--space-md);
     display: flex;
     align-items: center;
     gap: var(--space-sm);
+    color: #ffffff;
 }
 
 .section-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--text-xl);
-    color: var(--color-text-inverse);
+    font-size: var(--text-2xl);
 }
 
 .today-items {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
+    color: #9ca3af;
 }
 
-/* Individual today item */
-.today-item {
-    background-color: var(--color-background);
-    padding: var(--space-md);
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-left: 4px solid var(--color-primary);
-}
-
-.today-item-content {
-    flex: 1;
-}
-
-.today-item-title {
-    font-weight: var(--font-semibold);
-    color: var(--color-text-primary);
-    margin-bottom: var(--space-xs);
-}
-
-.today-item-time {
-    font-size: var(--text-sm);
-    color: var(--color-text-secondary);
-}
-
-.today-item-action {
-    display: flex;
-    gap: var(--space-sm);
-}
-
-/* Empty state */
 .empty-state {
-    color: var(--color-text-tertiary);
-    font-style: italic;
     text-align: center;
-    padding: var(--space-md) 0;
-}
-
-.empty-state a {
-    color: var(--color-primary);
-    text-decoration: underline;
-}
-
-.empty-state a:hover {
-    color: var(--color-primary-dark);
+    padding: var(--space-lg) 0;
+    color: #6b7280;
+    font-style: italic;
 }
 
 /* ============================================
-   QUICK ACTIONS
-   ============================================ */
-
-.dashboard-actions {
-    margin-bottom: var(--space-2xl);
-}
-
-.action-buttons {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-}
-
-/* 2 columns on tablet */
-@media (min-width: 640px) {
-    .action-buttons {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* 4 columns on desktop */
-@media (min-width: 1024px) {
-    .action-buttons {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-/* ============================================
-   MOBILE-FIRST BOTTOM TAB NAVIGATION
+   BOTTOM TAB NAVIGATION - ICONS ONLY, DARK
    ============================================ */
 
 .bottom-tabs {
@@ -312,57 +180,62 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: var(--color-surface);
-    border-top: 1px solid var(--color-border);
+    background-color: #0f0f0f;
+    border-top: 1px solid #2a2a2a;
     display: flex;
     justify-content: space-around;
-    padding: var(--space-xs) var(--space-sm) calc(var(--space-xs) + env(safe-area-inset-bottom));
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    padding: var(--space-sm) var(--space-xs);
+    padding-bottom: calc(var(--space-sm) + env(safe-area-inset-bottom));
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
 }
 
-/* Individual tab item */
 .tab-item {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: var(--color-text-tertiary);
-    padding: var(--space-xs) var(--space-sm);
-    min-width: 60px;
-    flex-shrink: 0;
-    transition: all var(--transition-fast);
+    color: #6b7280;
+    padding: var(--space-sm);
+    min-width: 50px;
+    height: 50px;
     border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    position: relative;
 }
 
 .tab-item:hover,
 .tab-item:focus {
-    background-color: var(--color-surface-dark);
-    color: var(--color-text-primary);
+    background-color: #1a1a1a;
+    color: #ffffff;
 }
 
 .tab-item.active {
-    color: var(--color-study);
-    font-weight: var(--font-semibold);
+    color: #3B82F6;
+}
+
+.tab-item.active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 3px;
+    background-color: #3B82F6;
+    border-radius: 0 0 3px 3px;
 }
 
 .tab-icon {
-    font-size: var(--text-xl);
-    margin-bottom: var(--space-xs);
+    font-size: var(--text-2xl);
 }
 
 .tab-label {
-    font-size: var(--text-xs);
-    text-align: center;
-    white-space: nowrap;
+    display: none; /* Hidden - icons only */
 }
 
 /* ============================================
-   RESPONSIVE ADJUSTMENTS
+   RESPONSIVE MOBILE
    ============================================ */
 
 @media (max-width: 639px) {
@@ -377,44 +250,32 @@
     .welcome-quote {
         font-size: var(--text-md);
     }
+    
+    .stats-grid {
+        gap: var(--space-sm);
+    }
+    
+    .stat-card {
+        padding: var(--space-md);
+    }
 }
 
-/* Desktop: Move tabs to sidebar */
+/* ============================================
+   DESKTOP ADJUSTMENTS
+   ============================================ */
+
 @media (min-width: 1024px) {
+    .dashboard-main {
+        padding: var(--space-3xl) var(--space-2xl);
+    }
+    
     .bottom-tabs {
-        position: static;
-        flex-direction: column;
-        width: 200px;
-        float: left;
-        margin-right: var(--space-xl);
-        border-top: none;
-        border-right: 1px solid var(--color-border);
-        box-shadow: none;
-        padding: var(--space-lg) 0;
-        height: 100vh;
-        position: sticky;
-        top: 0;
+        justify-content: center;
+        gap: var(--space-md);
     }
     
     .tab-item {
-        flex-direction: row;
-        justify-content: flex-start;
-        width: 100%;
-        padding: var(--space-md);
-        min-width: auto;
-    }
-    
-    .tab-icon {
-        margin-bottom: 0;
-        margin-right: var(--space-sm);
-    }
-    
-    .tab-label {
-        font-size: var(--text-md);
-    }
-    
-    .dashboard-main {
-        padding-bottom: var(--space-xl);
-        margin-left: 220px;
+        min-width: 60px;
+        height: 60px;
     }
 }
