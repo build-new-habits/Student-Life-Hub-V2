@@ -737,3 +737,176 @@
     font-size: var(--text-xl);
     margin-top: var(--space-sm);
 }
+/* ============================================
+   NOTIFICATION STYLES
+   ============================================ */
+
+.points-notification {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: linear-gradient(135deg, #FBBF24, #F59E0B);
+    color: #ffffff;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    z-index: 10000;
+    transform: translateX(400px);
+    opacity: 0;
+    transition: all var(--transition-normal);
+}
+
+.points-notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.notification-icon {
+    font-size: var(--text-2xl);
+}
+
+.notification-points {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+}
+
+.notification-reason {
+    font-size: var(--text-sm);
+    opacity: 0.9;
+}
+
+/* ============================================
+   LEVEL UP CELEBRATION
+   ============================================ */
+
+.level-up-celebration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+}
+
+.level-up-celebration.show {
+    opacity: 1;
+}
+
+.celebration-content {
+    text-align: center;
+    color: #ffffff;
+    transform: scale(0.8);
+    transition: transform var(--transition-slow);
+}
+
+.level-up-celebration.show .celebration-content {
+    transform: scale(1);
+}
+
+.celebration-icon {
+    font-size: 5rem;
+    margin-bottom: var(--space-lg);
+    animation: bounce 1s infinite;
+}
+
+.celebration-title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--space-md);
+    background: linear-gradient(135deg, #FBBF24, #F59E0B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.celebration-level {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    color: #3B82F6;
+    margin-bottom: var(--space-sm);
+}
+
+.celebration-message {
+    font-size: var(--text-xl);
+    opacity: 0.8;
+}
+
+/* ============================================
+   ACHIEVEMENT NOTIFICATION
+   ============================================ */
+
+.achievement-notification {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background-color: #1a1a1a;
+    border: 2px solid #3B82F6;
+    color: #ffffff;
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 40px rgba(59, 130, 246, 0.5);
+    display: flex;
+    gap: var(--space-md);
+    max-width: 350px;
+    z-index: 10000;
+    transform: translateX(400px);
+    opacity: 0;
+    transition: all var(--transition-normal);
+}
+
+.achievement-notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.achievement-badge {
+    background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.achievement-icon {
+    font-size: var(--text-3xl);
+}
+
+.achievement-title {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #FBBF24;
+    margin-bottom: var(--space-xs);
+    font-weight: var(--font-semibold);
+}
+
+.achievement-name {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--space-xs);
+}
+
+.achievement-description {
+    font-size: var(--text-sm);
+    opacity: 0.8;
+}
+
+/* Mobile adjustments */
+@media (max-width: 639px) {
+    .points-notification,
+    .achievement-notification {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
